@@ -69,12 +69,8 @@ public class Ingredient implements Comparable<Ingredient>, Serializable{
 
     public void setOutputStringType(Integer OutputStringType) {
         this.OutputStringType = OutputStringType;
-    }
-     
-    /**
-     *
-     * @return
-     */
+    }    
+   
     @Override
     public String toString(){
         switch(OutputStringType){
