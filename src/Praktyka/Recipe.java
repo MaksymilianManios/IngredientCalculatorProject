@@ -69,7 +69,7 @@ public class Recipe implements Comparable<Recipe> ,Serializable{
     
     @Override
     public String toString(){
-        return String.format("|%-20s|%-20s|",Name,Type);
+        return String.format("%-20s %-20s ",Name,Type);
     }
     
     @Override
