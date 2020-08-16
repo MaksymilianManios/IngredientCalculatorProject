@@ -5,9 +5,17 @@
  */
 package Praktyka;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.ListModel;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFileChooser;
 
 /**
  *
@@ -20,16 +28,62 @@ public class MainWindowIngredientsCalculator extends javax.swing.JFrame {
      */
     
     RecipeModelList recipeModelList;
-    List<Recipe> recipeList;    
+    List<Recipe> recipeList;   
+    List<Ingredient> ingredientList;
     public Recipe recipe;
     public Ingredient ingredient;
     
     public MainWindowIngredientsCalculator() {
         initComponents();
-            
+        initList();
+        fillList();
     }
     
-    public void initList(){
+    private void fillList(){
+        recipe = new Recipe("Chleb","Ciasto");
+        ingredientList = new ArrayList<>();
+        ingredient = new Ingredient("maka",500.0);
+        ingredientList.add(ingredient);
+        ingredient = new Ingredient("woda",300.0);
+        ingredientList.add(ingredient);
+        ingredient = new Ingredient("sol",20.0);
+        ingredientList.add(ingredient);
+        ingredient = new Ingredient("drozdze",7.0);
+        
+        ingredientList.add(ingredient);
+        
+        recipeModelList.RecipeList.add(recipe);
+        
+        recipe = new Recipe("bulka","Ciasto");
+        ingredientList = new ArrayList<>();
+        ingredient = new Ingredient("maka",100.0);
+        ingredientList.add(ingredient);
+        ingredient = new Ingredient("woda",70.0);
+        ingredientList.add(ingredient);
+        ingredient = new Ingredient("sol",2.0);
+        ingredientList.add(ingredient);
+        ingredient = new Ingredient("drozdze",3.0);
+        
+        ingredientList.add(ingredient);
+        
+        recipeModelList.RecipeList.add(recipe);
+        
+        recipe = new Recipe("pizza","danie");
+        ingredientList = new ArrayList<>();
+        ingredient = new Ingredient("maka",700.0);
+        ingredientList.add(ingredient);
+        ingredient = new Ingredient("woda",700.0);
+        ingredientList.add(ingredient);
+        ingredient = new Ingredient("sos pomidorowy",125.0);
+        ingredientList.add(ingredient);
+        ingredient = new Ingredient("mozarella",250.0);
+        
+        ingredientList.add(ingredient);
+        
+        recipeModelList.RecipeList.add(recipe);
+    }
+    
+    private void initList(){
         recipeList = new ArrayList<>();        
         recipeModelList = new RecipeModelList(recipeList);
         jList1.setModel(recipeModelList);  
@@ -51,10 +105,11 @@ public class MainWindowIngredientsCalculator extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
+        DeleteButton = new javax.swing.JMenuItem();
+        LoadButton = new javax.swing.JMenuItem();
+        SaveButton = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
+        jMenuItem5 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -79,18 +134,47 @@ public class MainWindowIngredientsCalculator extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem1);
 
-        jMenuItem4.setText("Delete");
-        jMenu1.add(jMenuItem4);
+        DeleteButton.setText("Delete");
+        DeleteButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DeleteButtonActionPerformed(evt);
+            }
+        });
+        jMenu1.add(DeleteButton);
 
-        jMenuItem2.setText("Load");
-        jMenu1.add(jMenuItem2);
+        LoadButton.setText("Load");
+        LoadButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LoadButtonActionPerformed(evt);
+            }
+        });
+        jMenu1.add(LoadButton);
 
-        jMenuItem3.setText("Save");
-        jMenu1.add(jMenuItem3);
+        SaveButton.setText("Save");
+        SaveButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SaveButtonActionPerformed(evt);
+            }
+        });
+        jMenu1.add(SaveButton);
 
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Exit");
+        jMenu2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu2ActionPerformed(evt);
+            }
+        });
+
+        jMenuItem5.setText("Save and Exit");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem5);
+
         jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
@@ -125,12 +209,64 @@ public class MainWindowIngredientsCalculator extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+       
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        // TODO add your handling code here:
+        //
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenu2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu2ActionPerformed
+        
+    }//GEN-LAST:event_jMenu2ActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        System.exit(0);        
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void SaveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveButtonActionPerformed
+        JFileChooser fileChoser = new JFileChooser();
+        fileChoser.setDialogType(JFileChooser.SAVE_DIALOG);
+        int ret = fileChoser.showSaveDialog(this);
+        if(ret == JFileChooser.APPROVE_OPTION){            
+            try {
+                ObjectOutputStream outputStream;
+                outputStream = new ObjectOutputStream(new FileOutputStream(fileChoser.getSelectedFile()));
+                outputStream.writeObject(recipeList);
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(MainWindowIngredientsCalculator.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(MainWindowIngredientsCalculator.class.getName()).log(Level.SEVERE, null, ex);
+            }            
+        }
+    }//GEN-LAST:event_SaveButtonActionPerformed
+
+    private void LoadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoadButtonActionPerformed
+        JFileChooser fileChoser = new JFileChooser();
+        fileChoser.setDialogType(JFileChooser.OPEN_DIALOG);
+        int ret = fileChoser.showOpenDialog(this);
+        if(ret == JFileChooser.APPROVE_OPTION){                       
+           
+            try {
+                ObjectInputStream inputStream;
+                inputStream = new ObjectInputStream(new FileInputStream(fileChoser.getSelectedFile()));
+                recipeList = (List<Recipe>) inputStream.readObject();                
+                recipeModelList = new RecipeModelList(recipeList);        
+                jList1.setModel(recipeModelList);
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(MainWindowIngredientsCalculator.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException | ClassNotFoundException ex) {
+                Logger.getLogger(MainWindowIngredientsCalculator.class.getName()).log(Level.SEVERE, null, ex);
+            } 
+        }
+    }//GEN-LAST:event_LoadButtonActionPerformed
+
+    private void DeleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteButtonActionPerformed
+        List<Recipe> selectedRecipeList = jList1.getSelectedValuesList();
+        for(Recipe selectedRecipe:selectedRecipeList){
+            recipeModelList.RemoveRecipe(selectedRecipe);
+        }
+    }//GEN-LAST:event_DeleteButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -165,6 +301,9 @@ public class MainWindowIngredientsCalculator extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem DeleteButton;
+    private javax.swing.JMenuItem LoadButton;
+    private javax.swing.JMenuItem SaveButton;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JList<Recipe> jList1;
@@ -172,9 +311,7 @@ public class MainWindowIngredientsCalculator extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }
