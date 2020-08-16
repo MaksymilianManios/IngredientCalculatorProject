@@ -12,6 +12,5 @@ public class RecipeComparator implements Comparator<Recipe> {
     @Override
     public int compare(Recipe recipeOne, Recipe recipeTwo) {
         return recipeOne.getName().compareToIgnoreCase(recipeTwo.getName());
-    }
-    // o tu se cos dodam
+    }    
 }
