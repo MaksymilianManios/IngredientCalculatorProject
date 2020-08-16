@@ -16,12 +16,12 @@ public class RecipeModelList extends AbstractListModel<Recipe>{
 
     public RecipeModelList(List<Recipe> RecipeList) {
         this.RecipeList = RecipeList;
-        Collections.sort(RecipeList,recipeComparator);
+        sortRecipeList();
     }
     
     public void setRecipeList(List<Recipe> RecipeList) {
         this.RecipeList = RecipeList;
-        Collections.sort(RecipeList, recipeComparator);
+        sortRecipeList();
         RefreshRecipeModel();
     }
 
@@ -40,13 +40,17 @@ public class RecipeModelList extends AbstractListModel<Recipe>{
         } 
     }
     
-    public void RefreshRecipeModel(){
-        fireContentsChanged(this, 0, RecipeList.size()-1);
+    private void sortRecipeList(){
+        Collections.sort(RecipeList, recipeComparator);
+    }
+    
+    public void RefreshRecipeModel(){        
+        fireContentsChanged(this, 0, RecipeList.size()-1);                
     }
     
     public void AddRecipe(Recipe NewRecipe){
         RecipeList.add(NewRecipe);
-        Collections.sort(RecipeList, recipeComparator);
+        sortRecipeList();
         RefreshRecipeModel();
     }
     
