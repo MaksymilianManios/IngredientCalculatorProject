@@ -1,6 +1,7 @@
 
 package Praktyka;
 
+import java.util.Collections;
 import java.util.List;
 import javax.swing.AbstractListModel;
 
@@ -11,6 +12,7 @@ import javax.swing.AbstractListModel;
 public class IngredientsModelList extends AbstractListModel<Ingredient>{
     
     List<Ingredient> IngredientList;    
+    IngredientComparator ingredientComparator = new IngredientComparator();
     
     public IngredientsModelList(List<Ingredient> IngredientList) {
         this.IngredientList = IngredientList;
@@ -48,4 +50,10 @@ public class IngredientsModelList extends AbstractListModel<Ingredient>{
         IngredientList.remove(IngredientToDelete);
         RefreshIngredientModel();
     } 
+    
+    public void SortIngredientList(Integer SORT_STYLE){
+        ingredientComparator.setSortBy(SORT_STYLE);
+        Collections.sort(IngredientList,ingredientComparator);
+        RefreshIngredientModel();
+    }
 }
