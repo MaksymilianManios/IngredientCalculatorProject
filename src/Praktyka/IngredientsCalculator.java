@@ -5,9 +5,7 @@
  */
 package Praktyka;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import javax.swing.JOptionPane;
 /**
  *
  * @author makma
@@ -53,8 +51,23 @@ public class IngredientsCalculator {
         MainWindowIngredientsCalculator window = new MainWindowIngredientsCalculator();
         window.setTitle("Recipe Base");
         window.setVisible(true);
-        
-        
+//        Ingredient ingredient;
+//        Recipe recipe = new Recipe("Chleb","Ciasto");
+//        ingredient = new Ingredient("maka",500.0);
+//        recipe.getIngredientList().add(ingredient);
+//        ingredient = new Ingredient("woda",300.0);
+//        recipe.getIngredientList().add(ingredient);
+//        ingredient = new Ingredient("sol",20.0);
+//        recipe.getIngredientList().add(ingredient);
+//        ingredient = new Ingredient("drozdze",7.0);
+//        recipe.getIngredientList().add(ingredient);
+//        
+//        RecipePanel recipePanel = new RecipePanel(recipe);        
+//        int ret = JOptionPane.showConfirmDialog(null, recipePanel,"Recipe",JOptionPane.OK_CANCEL_OPTION);        
+//        if(ret == JOptionPane.OK_OPTION){
+//            recipePanel.getRecipe();
+//            
+//        }
     }
     
 }

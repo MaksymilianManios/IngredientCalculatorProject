@@ -44,7 +44,8 @@ public class RecipeModelList extends AbstractListModel<Recipe>{
         Collections.sort(RecipeList, recipeComparator);
     }
     
-    public void RefreshRecipeModel(){        
+    public void RefreshRecipeModel(){  
+        sortRecipeList();
         fireContentsChanged(this, 0, RecipeList.size()-1);                
     }
     

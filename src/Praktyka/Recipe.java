@@ -17,15 +17,18 @@ import java.util.List;
 
 public class Recipe implements Comparable<Recipe> ,Serializable{
     
-    public static final double ZERO = 0.0;
-    public static final int ZERO_INT = 0;
-    public static final int HUNDRED_PERCENT = 100;
+    /**
+     *
+     */
+    transient public static final double ZERO = 0.0;
+    transient public static final int ZERO_INT = 0;
+    transient public static final int HUNDRED_PERCENT = 100;
     
-    private final String Name;
-    private final String Type;
+    private String Name;
+    private String Type;
     
     private List<Ingredient> IngredientList;
-    public IngredientsModelList IngredientListModel;
+    transient public IngredientsModelList IngredientListModel;
     
     public Recipe(String NameOfRecipe,String TypeOfDish){
         this.Name = NameOfRecipe;
@@ -34,12 +37,27 @@ public class Recipe implements Comparable<Recipe> ,Serializable{
         IngredientListModel = new IngredientsModelList(IngredientList);
     }
 
+    public void setName(String Name) {
+        this.Name = Name;
+    }
+    public void setType(String Type) {
+        this.Type = Type;
+    }
+
+    
     public String getName() {
         return Name;
-    }    
+    }   
+    public String getType() {
+        return Type;
+    }  
     
     public List<Ingredient> getIngredientList() {
         return IngredientList;
+    }
+    
+    public void RefreshListModel(){
+        this.IngredientListModel = new IngredientsModelList(IngredientList);
     }
     
     public void setIngredientList(List<Ingredient> IngredientList) {
@@ -58,6 +76,7 @@ public class Recipe implements Comparable<Recipe> ,Serializable{
         for(int IngredientIndex = ZERO_INT ; IngredientIndex<IngredientListModel.getSize();IngredientIndex++){
             IngredientListModel.getElementAt(IngredientIndex).setPercentageParticipation(IngredientListModel.getElementAt(IngredientIndex).getTemplateWeight()*GramsToPercent);
         }
+        IngredientListModel.RefreshIngredientModel();
     }
     
     public void SetIngredientsOutputType(int OutputType){
@@ -66,10 +85,16 @@ public class Recipe implements Comparable<Recipe> ,Serializable{
         }
         IngredientListModel.RefreshIngredientModel();
     }
+    public void CalculateRealWaight(double multipier){
+        for(Ingredient ing : IngredientList){
+            ing.setRealWeight(ing.getTemplateWeight()*multipier);
+        }
+        RefreshListModel();
+    }
     
     @Override
     public String toString(){
-        return String.format("%-20s %-20s ",Name,Type);
+        return String.format("%50.40s %50.40s",Name,Type);
     }
     
     @Override

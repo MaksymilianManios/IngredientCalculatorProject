@@ -15,7 +15,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -26,17 +28,17 @@ public class MainWindowIngredientsCalculator extends javax.swing.JFrame {
     /**
      * Creates new form MainWindowIngredientsCalculator
      */
-    
-    RecipeModelList recipeModelList;
-    List<Recipe> recipeList;   
-    List<Ingredient> ingredientList;
+    public ImageIcon icon = new ImageIcon("C:/Users/makma/OneDrive/Pulpit/plikitext/Icon.jpg");
+    public RecipeModelList recipeModelList;
+    public List<Recipe> recipeList;   
+    public List<Ingredient> ingredientList;
     public Recipe recipe;
     public Ingredient ingredient;
     
     public MainWindowIngredientsCalculator() {
         initComponents();
         initList();
-        fillList();
+        //fillList();
     }
     
     private void fillList(){
@@ -84,6 +86,7 @@ public class MainWindowIngredientsCalculator extends javax.swing.JFrame {
     }
     
     private void initList(){
+        recipe = new Recipe("","");
         recipeList = new ArrayList<>();        
         recipeModelList = new RecipeModelList(recipeList);
         jList1.setModel(recipeModelList);  
@@ -100,8 +103,9 @@ public class MainWindowIngredientsCalculator extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList<>();
+        AddRecipeButton = new javax.swing.JButton();
+        EditRecipeButton = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -115,12 +119,24 @@ public class MainWindowIngredientsCalculator extends javax.swing.JFrame {
 
         jScrollPane1.setViewportView(jList1);
 
-        jButton1.setText("Standard Recipe Ingredients Amount");
-
-        jButton2.setText("Estimate Ingredients Amount");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        AddRecipeButton.setText("Add Recipe");
+        AddRecipeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                AddRecipeButtonActionPerformed(evt);
+            }
+        });
+
+        EditRecipeButton.setText("Edit Recipe");
+        EditRecipeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EditRecipeButtonActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("View Recipe");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -186,11 +202,13 @@ public class MainWindowIngredientsCalculator extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 605, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(AddRecipeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(EditRecipeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -200,17 +218,25 @@ public class MainWindowIngredientsCalculator extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(AddRecipeButton, javax.swing.GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE)
+                    .addComponent(EditRecipeButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-       
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void EditRecipeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditRecipeButtonActionPerformed
+        this.recipe = jList1.getSelectedValue();
+        recipe.SetIngredientsOutputType(Ingredient.NAME_AND_TEMPLATE_WEIGHT);
+        RecipePanel recipePanel = new RecipePanel(recipe);        
+        int ret = JOptionPane.showConfirmDialog(null, recipePanel,"Recipe",JOptionPane.OK_CANCEL_OPTION,JOptionPane.PLAIN_MESSAGE,icon);        
+        if(ret == JOptionPane.OK_OPTION){            
+            recipePanel.getRecipe();
+            recipeModelList.RefreshRecipeModel();
+        }
+    }//GEN-LAST:event_EditRecipeButtonActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         //
@@ -250,7 +276,10 @@ public class MainWindowIngredientsCalculator extends javax.swing.JFrame {
             try {
                 ObjectInputStream inputStream;
                 inputStream = new ObjectInputStream(new FileInputStream(fileChoser.getSelectedFile()));
-                recipeList = (List<Recipe>) inputStream.readObject();                
+                recipeList = (List<Recipe>) inputStream.readObject();
+                for(Recipe rec : recipeList){
+                    rec.RefreshListModel();
+                }
                 recipeModelList = new RecipeModelList(recipeList);        
                 jList1.setModel(recipeModelList);
             } catch (FileNotFoundException ex) {
@@ -267,6 +296,23 @@ public class MainWindowIngredientsCalculator extends javax.swing.JFrame {
             recipeModelList.RemoveRecipe(selectedRecipe);
         }
     }//GEN-LAST:event_DeleteButtonActionPerformed
+
+    private void AddRecipeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddRecipeButtonActionPerformed
+        RecipePanel recipePanel = new RecipePanel();        
+        int ret = JOptionPane.showConfirmDialog(null, recipePanel,"Recipe",JOptionPane.OK_CANCEL_OPTION,JOptionPane.PLAIN_MESSAGE,icon);        
+        if(ret == JOptionPane.OK_OPTION){            
+            recipeModelList.AddRecipe(recipePanel.getRecipe());
+            recipeModelList.RefreshRecipeModel();
+        }
+    }//GEN-LAST:event_AddRecipeButtonActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        recipe = jList1.getSelectedValue();
+        recipe.SetIngredientsOutputType(Ingredient.NAME_AND_TEMPLATE_WEIGHT);
+        RecipeViewPanel recipeViewPanel= new RecipeViewPanel(recipe);
+        int ret = JOptionPane.showConfirmDialog(this,recipeViewPanel,recipe.getName(),JOptionPane.CLOSED_OPTION,JOptionPane.PLAIN_MESSAGE,icon);
+        recipe.IngredientListModel.RefreshIngredientModel();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -301,11 +347,12 @@ public class MainWindowIngredientsCalculator extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton AddRecipeButton;
     private javax.swing.JMenuItem DeleteButton;
+    private javax.swing.JButton EditRecipeButton;
     private javax.swing.JMenuItem LoadButton;
     private javax.swing.JMenuItem SaveButton;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JList<Recipe> jList1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;

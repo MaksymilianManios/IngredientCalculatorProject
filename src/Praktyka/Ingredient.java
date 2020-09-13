@@ -13,16 +13,17 @@ import java.io.Serializable;
  */
 
 public class Ingredient implements Comparable<Ingredient>, Serializable{
-    public static final double ZERO = 0.0;
-    public static final int NAME_AND_TEMPLATE_WEIGHT = 0;
-    public static final int NAME_AND_PERCENTAGE_PARTICIPATION = 1;
-    public static final int NAME_AND_REAL_WEIGHT = 2;
+    transient public static final double ZERO = 0.0;
+    transient public static final int NAME_AND_TEMPLATE_WEIGHT = 0;
+    transient public static final int NAME_AND_PERCENTAGE_PARTICIPATION = 1;
+    transient public static final int NAME_AND_REAL_WEIGHT = 2;
     
     private String Name;
     private Double TemplateWeight;
     private Double PercentageParticipation;
     private Double RealWeight;
     private Integer OutputStringType;
+    
     public Ingredient(String NameOfIngredient,Double TemplateWeightInGrams){        
         this.Name = NameOfIngredient;
         this.TemplateWeight = TemplateWeightInGrams;
@@ -75,13 +76,13 @@ public class Ingredient implements Comparable<Ingredient>, Serializable{
     public String toString(){
         switch(OutputStringType){
             case NAME_AND_TEMPLATE_WEIGHT:
-                return String.format("|%-20s|%-5.2f g|",Name,TemplateWeight);
+                return String.format("%-20s %-5.2f g",Name,TemplateWeight);
             case NAME_AND_PERCENTAGE_PARTICIPATION:
-                return String.format("|%-20s|%-3.1f Percent|",Name,PercentageParticipation);
+                return String.format("%-20s %-3.1f Percent",Name,PercentageParticipation);
             case NAME_AND_REAL_WEIGHT:
-                return String.format("|%-20s|%-5.2f g|",Name,RealWeight);
+                return String.format("%-20s %-5.2f g",Name,RealWeight);
             default:
-                return String.format("|%-20s|%-5.2f g|",Name,TemplateWeight);
+                return String.format("%-20s %-5.2f g",Name,TemplateWeight);
         }        
     }
 
