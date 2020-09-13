@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Praktyka;
 
 import java.io.FileInputStream;
@@ -38,52 +33,7 @@ public class MainWindowIngredientsCalculator extends javax.swing.JFrame {
     public MainWindowIngredientsCalculator() {
         initComponents();
         initList();
-        //fillList();
-    }
-    
-    private void fillList(){
-        recipe = new Recipe("Chleb","Ciasto");
-        ingredientList = new ArrayList<>();
-        ingredient = new Ingredient("maka",500.0);
-        ingredientList.add(ingredient);
-        ingredient = new Ingredient("woda",300.0);
-        ingredientList.add(ingredient);
-        ingredient = new Ingredient("sol",20.0);
-        ingredientList.add(ingredient);
-        ingredient = new Ingredient("drozdze",7.0);
-        
-        ingredientList.add(ingredient);
-        
-        recipeModelList.RecipeList.add(recipe);
-        
-        recipe = new Recipe("bulka","Ciasto");
-        ingredientList = new ArrayList<>();
-        ingredient = new Ingredient("maka",100.0);
-        ingredientList.add(ingredient);
-        ingredient = new Ingredient("woda",70.0);
-        ingredientList.add(ingredient);
-        ingredient = new Ingredient("sol",2.0);
-        ingredientList.add(ingredient);
-        ingredient = new Ingredient("drozdze",3.0);
-        
-        ingredientList.add(ingredient);
-        
-        recipeModelList.RecipeList.add(recipe);
-        
-        recipe = new Recipe("pizza","danie");
-        ingredientList = new ArrayList<>();
-        ingredient = new Ingredient("maka",700.0);
-        ingredientList.add(ingredient);
-        ingredient = new Ingredient("woda",700.0);
-        ingredientList.add(ingredient);
-        ingredient = new Ingredient("sos pomidorowy",125.0);
-        ingredientList.add(ingredient);
-        ingredient = new Ingredient("mozarella",250.0);
-        
-        ingredientList.add(ingredient);
-        
-        recipeModelList.RecipeList.add(recipe);
-    }
+    } 
     
     private void initList(){
         recipe = new Recipe("","");

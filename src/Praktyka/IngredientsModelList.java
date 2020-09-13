@@ -1,4 +1,3 @@
-
 package Praktyka;
 
 import java.util.Collections;
