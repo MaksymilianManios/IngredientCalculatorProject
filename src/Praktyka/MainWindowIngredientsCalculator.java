@@ -197,6 +197,20 @@ public class MainWindowIngredientsCalculator extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenu2ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        JFileChooser fileChoser = new JFileChooser();
+        fileChoser.setDialogType(JFileChooser.SAVE_DIALOG);
+        int ret = fileChoser.showSaveDialog(this);
+        if(ret == JFileChooser.APPROVE_OPTION){            
+            try {
+                ObjectOutputStream outputStream;
+                outputStream = new ObjectOutputStream(new FileOutputStream(fileChoser.getSelectedFile()));
+                outputStream.writeObject(recipeList);
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(MainWindowIngredientsCalculator.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(MainWindowIngredientsCalculator.class.getName()).log(Level.SEVERE, null, ex);
+            }            
+        }
         System.exit(0);        
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
