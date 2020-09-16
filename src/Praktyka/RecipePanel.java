@@ -3,6 +3,7 @@ package Praktyka;
  *
  * @author makma
  */
+import com.sun.glass.events.KeyEvent;
 import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -86,8 +87,18 @@ public class RecipePanel extends javax.swing.JPanel {
         jLabel2.setText("Type :");
 
         jTextField1.setText("jTextField1");
+        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField1KeyTyped(evt);
+            }
+        });
 
         jTextField2.setText("jTextField2");
+        jTextField2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField2KeyTyped(evt);
+            }
+        });
 
         GramButton.setText("g");
         GramButton.addActionListener(new java.awt.event.ActionListener() {
@@ -196,6 +207,36 @@ public class RecipePanel extends javax.swing.JPanel {
         recipe.SetIngredientsOutputType(Ingredient.NAME_AND_TEMPLATE_WEIGHT);
         recipe.IngredientListModel.RefreshIngredientModel();
     }//GEN-LAST:event_GramButtonActionPerformed
+
+    private void jTextField1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyTyped
+        char c = evt.getKeyChar();
+        if(!(    (((int)c >= 65) && ((int)c <= 90))
+            || (((int)c >= 97) && ((int)c <= 122))
+            || (c == KeyEvent.VK_BACKSPACE)
+            || (c == KeyEvent.VK_DELETE)
+            || (c == KeyEvent.VK_ENTER)
+            || (c == KeyEvent.MODIFIER_SHIFT)
+            || (c == KeyEvent.VK_SPACE)
+        )){
+            getToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTextField1KeyTyped
+
+    private void jTextField2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField2KeyTyped
+        char c = evt.getKeyChar();
+        if(!(    (((int)c >= 65) && ((int)c <= 90))
+            || (((int)c >= 97) && ((int)c <= 122))
+            || (c == KeyEvent.VK_BACKSPACE)
+            || (c == KeyEvent.VK_DELETE)
+            || (c == KeyEvent.VK_ENTER)
+            || (c == KeyEvent.MODIFIER_SHIFT)
+            || (c == KeyEvent.VK_SPACE)
+        )){
+            getToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTextField2KeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

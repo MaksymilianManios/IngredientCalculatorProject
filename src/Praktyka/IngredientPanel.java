@@ -108,6 +108,7 @@ public class IngredientPanel extends javax.swing.JPanel {
             || (c == KeyEvent.VK_DELETE)
             || (c == KeyEvent.VK_ENTER)
             || (c == KeyEvent.MODIFIER_SHIFT)
+            || (c == KeyEvent.VK_SPACE)
         )){
             getToolkit().beep();
             evt.consume();
