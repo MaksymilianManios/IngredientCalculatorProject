@@ -58,7 +58,6 @@ public class MainWindowIngredientsCalculator extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
         DeleteButton = new javax.swing.JMenuItem();
         LoadButton = new javax.swing.JMenuItem();
         SaveButton = new javax.swing.JMenuItem();
@@ -91,14 +90,6 @@ public class MainWindowIngredientsCalculator extends javax.swing.JFrame {
         });
 
         jMenu1.setText("Options");
-
-        jMenuItem1.setText("Add");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
-            }
-        });
-        jMenu1.add(jMenuItem1);
 
         DeleteButton.setText("Delete");
         DeleteButton.addActionListener(new java.awt.event.ActionListener() {
@@ -187,10 +178,6 @@ public class MainWindowIngredientsCalculator extends javax.swing.JFrame {
             recipeModelList.RefreshRecipeModel();
         }
     }//GEN-LAST:event_EditRecipeButtonActionPerformed
-
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        //
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenu2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu2ActionPerformed
         
@@ -321,7 +308,6 @@ public class MainWindowIngredientsCalculator extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
